@@ -1,4 +1,4 @@
-const { generateToken } = require("../helperFuntion/GenerateJWT");
+const generateToken  = require("../helperFuntion/GenerateJWT");
 const User = require("../model/user.model");
 
 
