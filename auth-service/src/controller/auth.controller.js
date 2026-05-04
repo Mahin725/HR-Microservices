@@ -1,5 +1,5 @@
 const { generateToken } = require("../helperFuntion/GenerateJWT");
-const user = require("../model/user.model");
+const User = require("../model/user.model");
 
 
 exports.register = async (req, res) => {
@@ -20,8 +20,8 @@ exports.register = async (req, res) => {
             password,
             role,
         });
-
-        return res.status(201).json({
+        console.log(user)
+        res.status(201).json({
             message: "User registered successfully",
             user: {
                 id: user._id,
@@ -30,7 +30,8 @@ exports.register = async (req, res) => {
             },
         });
     } catch (error) {
-        return res.status(500).json({
+        console.log("error: ",error);
+        res.status(500).json({
             message: "Something went wrong",
             error: error.message,
         });
