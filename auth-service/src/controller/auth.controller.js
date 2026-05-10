@@ -86,3 +86,32 @@ exports.login = async (req, res) => {
         });
     }
 };
+
+// 🔍 VERIFY USER ID
+exports.verify = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+            });
+        }
+
+        return res.status(200).json({
+            message: "User verified successfully",
+            user: {
+                id: user._id,
+                email: user.email,
+                role: user.role,
+                isActive: user.isActive,
+            },
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: "Something went wrong",
+            error: error.message,
+        });
+    }
+};
